@@ -1,0 +1,22 @@
+.env
+.env.*
+!.env.example
+credentials.txt
+.user.yml
+
+/data/
+/rag/cache/
+
+logs/
+target/
+dbt_packages/
+dbt_internal_packages/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+.vscode/
+# Copias privadas de SQL
+*.local.sql

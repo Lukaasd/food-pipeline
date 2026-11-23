@@ -1,0 +1,20 @@
+flowchart TD
+    subgraph batch["Airflow · food_batch · ejecución diaria"]
+        reload_raw["reload_raw<br/>Carga los CSV de S3 en FOOD.RAW"]
+        dbt_build_core["dbt_build_core<br/>Construye staging y marts de negocio y ejecuta sus tests"]
+        enrich_reviews["enrich_reviews<br/>Clasifica reseñas pendientes con Qwen en Ollama"]
+        dbt_build_ai["dbt_build_ai<br/>Reconstruye MART_REVIEW_INSIGHTS"]
+
+        reload_raw --> dbt_build_core --> enrich_reviews --> dbt_build_ai
+    end
+
+    raw_reviews[("FOOD.STAGING.STG_REVIEWS")]
+    classifications[("FOOD.AI.REVIEW_ENRICHED")]
+
+    dbt_build_core -.-> raw_reviews
+    raw_reviews -.-> enrich_reviews
+    enrich_reviews -.-> classifications
+    classifications -.-> dbt_build_ai
+    raw_reviews -.-> dbt_build_ai
+
+    legend["Flechas continuas · dependencias de Airflow<br/>Flechas punteadas · lectura o escritura de datos"]

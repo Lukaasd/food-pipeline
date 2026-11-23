@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: restaurant_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_restaurants')
+                field: restaurant_id
+
+      - name: date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: order_timestamp
+        data_tests: [not_null]
+
+      - name: order_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['DELIVERED', 'CANCELLED', 'REFUNDED']

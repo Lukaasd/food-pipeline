@@ -1,0 +1,23 @@
+name: food_proyect
+
+profile: food_proyect
+
+seed-paths: ["seeds"]
+model-paths: ["models"]
+macro-paths: ["macros"]
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  # Builds seeds into '<your_schema_name>_raw'
+  food_proyect:
+    +schema: raw
+
+models:
+  food_proyect:
+    staging : { +materialized : view, +schema: staging}
+    marts : { +materialized: table, +schema: marts}  
+  snapshots : 
+    food_proyect : { +materialized: snapshots, +schema: snapshots}
+

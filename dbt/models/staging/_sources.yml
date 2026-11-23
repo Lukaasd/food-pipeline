@@ -1,0 +1,12 @@
+ sources:
+  - name: raw
+    database: FOOD
+    schema: RAW
+    tables:
+     - name: restaurants
+     - name: food
+     - name: menu
+     - name: orders
+     - name: order_items
+     - name: reviews
+     - name: users

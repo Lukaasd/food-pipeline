@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: ai
+    database: FOOD
+    schema: AI
+    tables:
+      - name: review_enriched
